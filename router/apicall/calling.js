@@ -1,4 +1,5 @@
 var module = require('./apiCall');
+var module2 = require('../api/TalkService');
 
 var agent_key = 'FxRhny8GSoSOCufs6Bfa';
 var partner_key = 'aooCDF7yTlu8LHteim52';
@@ -27,4 +28,6 @@ var devTestSendData = {
                     };
 var devTestSendPath = '/' + partner_key + '/send';
 
-module.apicall('dev', devTestTempRegData, devTestTempRegPath);
+//module.apicall('dev', devTestTempRegData, devTestTempRegPath);
+
+module2.getTalkList();

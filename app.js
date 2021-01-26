@@ -1,5 +1,5 @@
 /* DB 접속정보 */
-var maria = require('./maria.js');
+var maria = require('./config/maria');
 var dbConfig = require('./config/dbConfig');
 /* express 모듈 */
 var express = require('express');
