@@ -2,7 +2,8 @@ var module = require('./apiCall');
 var module2 = require('../api/TalkService');
 
 var agent_key = 'FxRhny8GSoSOCufs6Bfa';
-var partner_key = 'aooCDF7yTlu8LHteim52';
+var partner_key = 'aooCDF7yTlu8LHteim52';       // prod
+var partner_key_dev = 'fAO8bJKWQfuMwjNhSYXS';   // dev
 
 // 테스트 유저 등록
 var devTestUserRegData = {
