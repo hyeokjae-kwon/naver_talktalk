@@ -1,14 +1,27 @@
 var dbConn = require('../../config/maria');
 
+//var bodyParser = require('body-parser');
+
+var mybatisMapper = require('mybatis-mapper');
+mybatisMapper.createMapper(['../../mapper/TalkMapper.xml']);
+
 function TalkService() {
     this.getTalkList = function(request, response) {
         dbConn.getConnection(function(conn) {
-            conn.query('SELECT * FROM tb_msg_talk_log')
+            
+            var param = {
+                testParam : 1
+            };
+
+            let format = {language: 'sql', indent: ' '};
+            let query = mybatisMapper.getStatement('TalkMapper', 'selectTalkLogList', param, format);
+            console.log(query);
+            
+            conn.query(query)
                 .then((result) => {
                     console.log(result);
 
                     var output = {};
-                    var temp = [];
                     output.datas = result;
 
                     dbConn.sendJSON(response, 200, output);

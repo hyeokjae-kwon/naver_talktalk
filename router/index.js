@@ -3,8 +3,7 @@ var router = express.Router();
 var path = require('path');
 var HelloWorld = require('./sample/HelloWorld.js');
 
-//const mysql = require('../mysql.js');
-const maria = require('../maria.js');
+const maria = require('../config/maria.js');
 
 router.get('/', function (req, res, next) {
     maria.query('SELECT 1 FROM DUAL', function (err, rows) {

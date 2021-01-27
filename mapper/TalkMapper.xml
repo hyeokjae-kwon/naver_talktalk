@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TalkMapper">
+
+    <select id="selectTalkLogList">
+        SELECT *
+          FROM tb_msg_talk_log
+         WHERE 1 = 1
+           <if test="testParam != null and testParam != ''">
+           AND '1' = #{testParam}
+           </if>
+    </select>
+
+</mapper>
