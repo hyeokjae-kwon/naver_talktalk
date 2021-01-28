@@ -1,7 +1,7 @@
 const mariadb = require('mariadb');
 var config = require('./dbConfig');
 
-/* DB접속정보 등록 */
+// DB접속
 const pool = mariadb.createPool({
     host : config.host
     , port : config.port
@@ -9,6 +9,22 @@ const pool = mariadb.createPool({
     , password : config.password
     , database : config.database
 });
+/*
+module.exports = {
+    init: function() {
+        return mariadb.createPool(dbInfo);
+    },
+    connect: function(conn) {
+        conn.getConnection(function(err) {
+            if(err) {
+                console.error('mysql connection error : ' + err);
+            } else {
+                console.log('mysql is connected successfully!');
+            }
+        });
+    }
+}
+*/
 
 function dbConnect() {
     this.getConnection = function(callback) {
@@ -19,7 +35,7 @@ function dbConnect() {
 
             });
     }
-
+    // 비동기방식 connection
     this.getConnectionAsync = async function() {
         try {
             let conn = await pool.getConnection();

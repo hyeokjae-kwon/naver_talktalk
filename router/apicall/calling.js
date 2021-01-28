@@ -1,5 +1,5 @@
 var module = require('./apiCall');
-var module2 = require('../api/TalkService');
+var module2 = require('../talk/TalkService');
 
 var agent_key = 'FxRhny8GSoSOCufs6Bfa';
 var partner_key = 'aooCDF7yTlu8LHteim52';       // prod

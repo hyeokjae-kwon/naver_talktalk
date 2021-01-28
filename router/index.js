@@ -1,20 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var path = require('path');
-var HelloWorld = require('./sample/HelloWorld.js');
 
-const maria = require('../config/maria.js');
+// router js 파일 추가시 이곳에서 등록
+var main = require('./main');        // main 등록
+var talk = require('./talk');           // talk 등록
 
-router.get('/', function (req, res, next) {
-    maria.query('SELECT 1 FROM DUAL', function (err, rows) {
-        if(err) {
-            console.log('err : ' + err);
-            res.send(err);
-        } else {
-            console.log('rows : ' + rows);
-            res.send(rows);
-        }
-    });
-});
+router.use('/main', main);
+router.use('/talk', talk);
 
 module.exports = router;

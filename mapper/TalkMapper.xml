@@ -4,11 +4,13 @@
 
     <select id="selectTalkLogList">
         SELECT *
-          FROM tb_msg_talk_log
+          FROM tb_msg_talk
          WHERE 1 = 1
-           <if test="testParam != null and testParam != ''">
-           AND '1' = #{testParam}
+           <if test="clientSeq != null and clientSeq != ''">
+           AND client_seq = #{clientSeq}
            </if>
     </select>
+
+    
 
 </mapper>
