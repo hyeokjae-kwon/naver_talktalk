@@ -1,8 +1,4 @@
 var dbConn = require('../../config/maria');
-//var conn = dbConn.init();
-
-// DB connection 연결
-//dbConn.connect(conn);
 
 // mybatis-mapper 연결
 var mybatisMapper = require('mybatis-mapper');

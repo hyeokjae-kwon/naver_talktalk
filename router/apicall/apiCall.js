@@ -1,25 +1,26 @@
 var request = require('request');
 
-const agent_key = 'FxRhny8GSoSOCufs6Bfa';
-const api_server_dev = 'https://dev2-biztalk-api.talk.naver.com';
-const api_server_prod = 'https://biztalk-api.talk.naver.com';
-const api_version = '/v1';
+const AGENT_KEY = 'FxRhny8GSoSOCufs6Bfa';
+const PARTNER_KEY_DEV = 'fAO8bJKWQfuMwjNhSYXS';
+const API_SERVER_DEV = 'https://dev2-biztalk-api.talk.naver.com';
+const API_SERVER_PROD = 'https://biztalk-api.talk.naver.com';
+const API_VERSION = '/v1';
 
 const OPTIONS = {
-    headers : {'Content-Type' : 'application/json', 'Authorization' : agent_key}
+    headers : {'Content-Type' : 'application/json', 'Authorization' : AGENT_KEY}
     , url : null
     , body : null
 };
 
-exports.apicall = function(serverPath ,api_path, data) {
+exports.apicall = function(serverPath ,apiPath, data) {
     
-    var api_server = api_server_prod;
+    var api_server = API_SERVER_PROD;
     // 개발일 경우 개발 서버로 호출
     if(serverPath == 'dev') {
-        api_server = api_server_dev;
+        api_server = API_SERVER_DEV;
     }
 
-    OPTIONS.url = api_server + api_version + api_path;
+    OPTIONS.url = api_server + API_VERSION + apiPath;
     OPTIONS.body = JSON.stringify(data);
 
     // API 호출
@@ -31,7 +32,7 @@ exports.apicall = function(serverPath ,api_path, data) {
     // 에러 핸들링 함수
     function statusCodeErrorHandler(statusCode, result) {
         if(statusCode == '200') {           
-            if(result.success == 'true') {
+            if(result.success == true) {
                 // 호출 성공(true)
                 console.log('API Status ' + statusCode);
                 console.log('API호출에 성공하였습니다.');
