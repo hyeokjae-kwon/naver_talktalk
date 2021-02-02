@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TalkLogMapper">
+
+    <insert id="insertTalkLogList">
+        INSERT INTO tb_msg_talk_log
+             ( 
+               CLIENT_SEQ
+             , CLIENT_ID
+             , AGENT_ID
+             , MSG_SEQ
+             , AGENT_MSG_SEQ
+             , SERV_NO
+             , TALK_MSG
+             , TALK_MSG_ENC
+             , TALK_ORD_NO
+             , SEND_KEY
+             , MSG_TITLE
+             , MSG_CONT
+             , MSG_CONT_ENC
+             , MSG_TYPE
+             , BACK_TYPE
+             , RECV_NO
+             , RECV_NO_MASK
+             , RECV_NO_ENC
+             , CALL_NO
+             , CALL_NO_MASK
+             , CALL_NO_ENC
+             , PROC_TYPE
+             , REQ_SEND_DT
+             , TMPL_CD
+             , MSG_IMG_PATH1
+             , MSG_IMG_PATH2
+             , MSG_IMG_PATH3
+             , IMG_PROC_FLAG
+             , AD_YN
+             , TALK_BTN_NM
+             , TALK_BTN_URL
+             , TALK_BTN_LINK1
+             , TALK_BTN_LINK2
+             , TALK_BTN_LINK3
+             , TALK_BTN_LINK4
+             , TALK_BTN_LINK5
+             , TALK_IMG_PATH
+             , TALK_IMG_URL
+             , TALK_IMG_LINK
+             , TALK_SEND_CD
+             , MSG_SEND_CD
+             , SERV_SEND_FLAG
+             , SERV_SEND_DT
+             , RESEND_FLAG
+             , IMG_SEND_DT
+             , TALK_RESULT
+             , MSG_RESULT
+             , TALK_REQ_DT
+             , MSG_REQ_DT
+             , SEND_SCC_DT
+             , SEND_CHNL_CD
+             , MSG_OFFICE_CD
+             , RESP_RECV_FLAG
+             , SERVER_REG_DT
+             , MOD_ID
+             , MOD_IP
+             , MOD_DT
+             , REG_ID
+             , REG_IP
+             , REG_DT
+             )
+      VALUES (
+               #{client_seq}
+             , #{client_id}
+             , #{agent_id}
+             , #{msg_seq}
+             , #{agent_msg_seq}
+             , #{serv_no}
+             , #{talk_msg}
+             , #{talk_msg_enc}
+             , #{talk_ord_no}
+             , #{send_key}
+             , #{msg_title}
+             , #{msg_cont}
+             , #{msg_cont_enc}
+             , #{msg_type}
+             , #{back_type}
+             , #{recv_no}
+             , #{recv_no_mask}
+             , #{recv_no_enc}
+             , #{call_no}
+             , #{call_no_mask}
+             , #{call_no_enc}
+             , #{proc_type}
+             , #{req_send_dt}
+             , #{tmpl_cd}
+             , #{msg_img_path1}
+             , #{msg_img_path2}
+             , #{msg_img_path3}
+             , #{img_proc_flag}
+             , #{ad_yn}
+             , #{talk_btn_nm}
+             , #{talk_btn_url}
+             , #{talk_btn_link1}
+             , #{talk_btn_link2}
+             , #{talk_btn_link3}
+             , #{talk_btn_link4}
+             , #{talk_btn_link5}
+             , #{talk_img_path}
+             , #{talk_img_url}
+             , #{talk_img_link}
+             , #{talk_send_cd}
+             , #{msg_send_cd}
+             , #{serv_send_flag}
+             , #{serv_send_dt}
+             , #{resend_flag}
+             , #{img_send_dt}
+             , #{talk_result}
+             , #{msg_result}
+             , #{talk_req_dt}
+             , #{msg_req_dt}
+             , #{send_scc_dt}
+             , #{send_chnl_cd}
+             , #{msg_office_cd}
+             , #{resp_recv_flag}
+             , NOW()
+             , #{mod_id}
+             , #{mod_ip}
+             , NOW()
+             , #{reg_id}
+             , #{reg_ip}
+             , NOW()
+             )
+    </insert>
+
+    <delete id='deleteTalkList'>
+        DELETE FROM tb_msg_talk
+         WHERE msg_seq = #{msgSeq}
+    </delete>
+</mapper>

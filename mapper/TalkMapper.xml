@@ -2,8 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TalkMapper">
 
-    <select id="selectTalkLogList">
-        SELECT *
+    <select id="selectTalkList">
+        SELECT msg_seq
+             , talk_ord_no
+             , client_seq
+             , client_id
+             , agent_id
+             , serv_seq
+             , tmpl_cd
+             , agent_msg_seq
+             , serv_no
+             , talk_msg
+             , talk_msg_enc
+             , send_key
+             , msg_title
+             , msg_cont
+             , msg_cont_enc
+             , msg_type
+             , back_type
+             , recv_no
+             , recv_no_enc
+             , call_no
+             , call_no_enc
+             , proc_type
+             , req_send_dt
+             , msg_img_path1
+             , msg_img_path2
+             , msg_img_path3
+             , img_proc_flag
+             , ad_yn
+             , talk_btn_nm
+             , talk_btn_url
+             , talk_btn_link1
+             , talk_btn_link2
+             , talk_btn_link3
+             , talk_btn_link4
+             , talk_btn_link5
+             , talk_img_path
+             , talk_img_url
+             , talk_img_link
+             , talk_send_cd
+             , msg_send_cd
+             , serv_send_flag
+             , serv_send_dt
+             , resend_flag
+             , img_send_dt
+             , serv_thread_id
+             , mod_id
+             , mod_ip
+             , mod_dt
+             , reg_id
+             , reg_ip
+             , reg_dt
           FROM tb_msg_talk
          WHERE 1 = 1
            <if test="clientSeq != null and clientSeq != ''">

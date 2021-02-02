@@ -9,22 +9,6 @@ const pool = mariadb.createPool({
     , password : config.password
     , database : config.database
 });
-/*
-module.exports = {
-    init: function() {
-        return mariadb.createPool(dbInfo);
-    },
-    connect: function(conn) {
-        conn.getConnection(function(err) {
-            if(err) {
-                console.error('mysql connection error : ' + err);
-            } else {
-                console.log('mysql is connected successfully!');
-            }
-        });
-    }
-}
-*/
 
 function dbConnect() {
     this.getConnection = function(callback) {
@@ -43,14 +27,12 @@ function dbConnect() {
         } catch(err) {
             throw err;
         }
-        return null;
+        //return null;
     }
 
     this.sendJSON = function(response, httpCode, body) {
         var result = JSON.stringify(body);
-        // response.send(httpCode, result);
-        // response.writeHead(httpCode, {'Content-Type' : 'text/html; charset=utf-8'});
-        // response.end(result);
+        
         console.log('result code : ' + httpCode);
         console.log(result);
     }

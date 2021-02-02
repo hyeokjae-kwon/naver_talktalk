@@ -1,23 +1,31 @@
 var dbConn = require('../../config/maria');
+var testCall = require('../apicall/testCall');
 
 // mybatis-mapper 연결
-var mybatisMapper = require('mybatis-mapper');
-mybatisMapper.createMapper(['././mapper/TalkMapper.xml']);
+var talkMapper = require('mybatis-mapper');
+talkMapper.createMapper(['././mapper/TalkMapper.xml']);
 
 function TalkService() {
     this.getTalkList = function(request, response) {
         dbConn.getConnection(function(conn) {
             var param = {
-                clientSeq : 31
+                clientSeq : 12
             };
     
-            let format = {language: 'sql'};
-            let query = mybatisMapper.getStatement('TalkMapper', 'selectTalkLogList', param, format);
+            var format = {language: 'sql'};
+            var query = talkMapper.getStatement('TalkMapper', 'selectTalkList', param, format);
             
             conn.query(query)
                     .then((result) => {
                         console.log('result code : ' + 200);
-                        console.log(JSON.stringify(result));
+                        var sendList = result[0];
+                        
+                        testCall.testSend(sendList);
+                        /*
+                        var sendList = JSON.parse(result);
+                        console.log(sendList);
+                        console.log(sendList.msg_cont);
+                        */
                     })
                     .then((res) => {
                         conn.end();
