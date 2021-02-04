@@ -11,20 +11,19 @@ function TalkLogService() {
             var param = logList;
 
             //param.talkResult = apiResult.resultCode;
-            param.talk_result = '0000';
-            console.log(param);
-    
-            var format = {language: 'sql'};
-            var query = talkLogMapper.getStatement('TalkLogMapper', 'insertTalkLogList', param, format);
-            console.log('check point 3=========');
+            param.talk_result = 'T-OK';
+            param.msg_result = '';
+            
+            var query = talkLogMapper.getStatement('TalkLogMapper', 'insertTalkLogList', param, {language: 'sql', indent: '  '});
             console.log(query);
 
             conn.query(query)
                     .then((result) => {
-                        console.log('result code : ' + 200);
+                        console.log('result code 1 : ' + 200);
                         var param = result[0];
                         console.log('check point 4=========');
-                        this.deleteTalkList(logList);
+                        //this.deleteTalkList(param);
+                        deleteTalkList(param);
                         /*
                         var sendList = JSON.parse(result);
                         console.log(sendList);
@@ -41,10 +40,10 @@ function TalkLogService() {
         });        
     };
 
-    this.deleteTalkList = function(logList) {
+    this.deleteTalkList = function(delList) {
         dbConn.getConnection(function(conn) {
             var param = {
-                msgSeq : logList.msgSeq
+                msgSeq : delList.MSG_SEQ
             };
     
             var format = {language: 'sql'};

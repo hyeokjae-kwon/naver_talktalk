@@ -2,6 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="TalkLogMapper">
 
+    <select id="selectTalkLogList">
+        SELECT *
+          FROM tb_msg_talk_log
+         WHERE 1 = 1
+           <if test="clientSeq != null and clientSeq != ''">
+           AND client_seq = #{clientSeq}
+           </if>
+    </select>
+
     <insert id="insertTalkLogList">
         INSERT INTO tb_msg_talk_log
              ( 
@@ -83,13 +92,13 @@
              , #{msg_type}
              , #{back_type}
              , #{recv_no}
-             , #{recv_no_mask}
+             , '******'
              , #{recv_no_enc}
              , #{call_no}
-             , #{call_no_mask}
+             , '******'
              , #{call_no_enc}
              , #{proc_type}
-             , #{req_send_dt}
+             , NOW()
              , #{tmpl_cd}
              , #{msg_img_path1}
              , #{msg_img_path2}
@@ -108,18 +117,18 @@
              , #{talk_img_link}
              , #{talk_send_cd}
              , #{msg_send_cd}
-             , #{serv_send_flag}
+             , 'P'
              , #{serv_send_dt}
              , #{resend_flag}
              , #{img_send_dt}
              , #{talk_result}
              , #{msg_result}
-             , #{talk_req_dt}
-             , #{msg_req_dt}
-             , #{send_scc_dt}
-             , #{send_chnl_cd}
-             , #{msg_office_cd}
-             , #{resp_recv_flag}
+             , NOW()
+             , null
+             , NOW()
+             , null
+             , '01'
+             , null
              , NOW()
              , #{mod_id}
              , #{mod_ip}
@@ -132,6 +141,7 @@
 
     <delete id='deleteTalkList'>
         DELETE FROM tb_msg_talk
-         WHERE msg_seq = #{msgSeq}
+         WHERE msg_seq = #{msg_seq}
     </delete>
+
 </mapper>

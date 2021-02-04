@@ -19,7 +19,7 @@ function TalkService() {
                     .then((result) => {
                         console.log('result code : ' + 200);
                         var sendList = result[0];
-                        
+                        conn.end();
                         testCall.testSend(sendList);
                         /*
                         var sendList = JSON.parse(result);
@@ -28,7 +28,8 @@ function TalkService() {
                         */
                     })
                     .then((res) => {
-                        conn.end();
+                        //conn.end();
+                        //testCall.testSend(sendList);
                     })
                     .catch(err => {
                         console.log(err);

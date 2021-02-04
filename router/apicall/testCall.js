@@ -45,7 +45,7 @@ function TestSend() {
             
             if(status == '200') {
                 // 진짜 성공은 res.success == true
-                // logModule.insertTalkLogList(res, sendList);
+                logModule.insertTalkLogList(res, sendList);
             }
 
         });
