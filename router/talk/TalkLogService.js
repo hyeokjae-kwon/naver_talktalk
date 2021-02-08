@@ -22,13 +22,6 @@ function TalkLogService() {
                         console.log('result code 1 : ' + 200);
                         var param = result[0];
                         console.log('check point 4=========');
-                        //this.deleteTalkList(param);
-                        deleteTalkList(param);
-                        /*
-                        var sendList = JSON.parse(result);
-                        console.log(sendList);
-                        console.log(sendList.msg_cont);
-                        */
                     })
                     .then((res) => {
                         conn.end();
@@ -39,7 +32,7 @@ function TalkLogService() {
                     });
         });        
     };
-
+    /*
     this.deleteTalkList = function(delList) {
         dbConn.getConnection(function(conn) {
             var param = {
@@ -63,6 +56,7 @@ function TalkLogService() {
                     });
         });  
     };
+    */
 }
 
 module.exports = new TalkLogService();

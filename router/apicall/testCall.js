@@ -1,4 +1,5 @@
 var apiModule = require('./apiCall');
+var talkModule = require('../talk/TalkService');
 var logModule = require('../talk/TalkLogService');
 
 const AGENT_KEY = 'FxRhny8GSoSOCufs6Bfa';
@@ -26,12 +27,12 @@ function TestSend() {
         var params = {
                     "인증번호" : "112233"
                     };
-       
+       console.log(sendList);
         var devTestSendData = {
-                            "messageKey": sendList.TALK_ORD_NO
-                            , "phoneNumber": sendList.RECV_NO
-                            , "templateCode": sendList.TMPL_CD
-                            , "message" : sendList.TALK_MSG
+                            "messageKey": sendList.talk_ord_no
+                            , "phoneNumber": sendList.recv_no
+                            , "templateCode": sendList.tmpl_cd
+                            , "message" : sendList.talk_msg
                             , "userName": "권혁재"
                             //, "templateParams" : params
                             };
@@ -45,7 +46,8 @@ function TestSend() {
             
             if(status == '200') {
                 // 진짜 성공은 res.success == true
-                logModule.insertTalkLogList(res, sendList);
+                console.log('api발송 완료');
+                talkModule.updateTalkList(res, sendList);
             }
 
         });
