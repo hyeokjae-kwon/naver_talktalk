@@ -18,9 +18,9 @@ function dbConnect() {
             }).catch(err => {
 
             });
-    }
-    // 비동기방식 connection
+    },
     this.getConnectionAsync = async function() {
+        // 비동기방식 connection
         try {
             let conn = await pool.getConnection();
             return conn;
@@ -28,8 +28,7 @@ function dbConnect() {
             throw err;
         }
         //return null;
-    }
-
+    },
     this.sendJSON = function(response, httpCode, body) {
         var result = JSON.stringify(body);
         

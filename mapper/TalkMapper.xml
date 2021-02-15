@@ -61,7 +61,7 @@
            </if>
     </select>
 
-    <update id='updateTalkList'>
+    <update id="updateTalkList">
         UPDATE tb_msg_talk
            SET talk_send_cd   = #{talk_send_cd}
              , serv_send_dt   = NOW()

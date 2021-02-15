@@ -10,11 +10,11 @@ app.use(bodyParser.urlencoded({extended: true}));
 var router = require('./router');
 app.use('/', router);
 
-var talkService = require('./router/talk/TalkService');
+var talkService = require('./router/TalkService');
 var cron = require('node-cron');
 cron.schedule('*/5 * * * * *', function() {
     console.log('*****cron_scheduler_start');
-    talkService.getTalkList();
+    talkService.sendNaverTalk();
     console.log('cron_scheduler_end*****');
 });
 
