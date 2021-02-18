@@ -6,7 +6,7 @@ const async = require('async');
 var AWS = require('aws-sdk');
 // Set the region
 AWS.config.update({region: 'ap-northeast-2'});
-AWS.config.loadFromPath('./awsConfig.json')
+AWS.config.loadFromPath('./config/awsConfig.json')
 
 // Create an SQS service object
 var sqs = new AWS.SQS({apiVersion: '2012-11-05'});
