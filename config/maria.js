@@ -13,10 +13,8 @@ const pool = mariadb.createPool({
 function dbConnect() {
     this.getConnection = function(callback) {
         pool.getConnection()
-            .then(conn => {
+            .then((conn) => {
                 callback(conn);
-            }).catch(err => {
-
             });
     },
     this.getConnectionAsync = async function() {

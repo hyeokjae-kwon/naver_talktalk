@@ -7,8 +7,8 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: true}));
 
 // router 폴더에 있는 js 파일을 쓰도록 변경
-var router = require('./router');
-app.use('/', router);
+// var router = require('./router/index');
+// app.use('/', router);
 
 var talkService = require('./router/TalkService');
 var cron = require('node-cron');
@@ -25,4 +25,4 @@ cron.schedule('*/5 * * * * *', function() {
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
-app.use(router);
+//app.use(router);

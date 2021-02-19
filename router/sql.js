@@ -11,25 +11,44 @@ module.exports = function () {
   return {
     insert: function(param, callback) {
       dbConn.getConnection(function(conn) {
-        var param = {
-            clientSeq : 12
-        };
-
-        var query = talkMapper.getStatement('TalkMapper', 'selectTalkList', param, format);
+                
+        /*
+        if(err) {
+          return callback(err);
+        }
         
-        conn.query(query)
-                .then((result) => {
-                    console.log('result code : ' + 200);
-                    // var sendList = result[0];
-                    // testCall.testSend(sendList);
-                })
-                .then((res) => {
-                    conn.end();
-                })
-                .catch(err => {
-                    console.log(err);
-                    conn.end();
-                });
+        conn.beginTransaction(err => {
+          console.log('22222222');
+          
+          if(err) {
+            console.log(err);
+            return callback(err);
+          } 
+          */
+
+          console.log('Start Transaction!');
+          var query = talkMapper.getStatement('TalkMapper', 'addMessages', param, format);
+          
+          conn.query(query)
+                  .then((result) => {
+                      console.log('result code : ' + 200);
+                      console.log(result);
+                      conn.commit();
+                      conn.release();
+                  })
+                  .then((res) => {
+                      conn.commit();
+                      conn.release();
+                  })
+                  .catch(err => {
+                      console.log(err);
+                      conn.rollback();
+                      conn.release();
+                  });
+
+                  //conn.release();
+          
+        //});
       });  
     },
     update: function(param, callback) {

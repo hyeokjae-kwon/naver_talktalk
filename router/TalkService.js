@@ -1,7 +1,8 @@
 var apiModule = require('./apiCall');
-var sql = require('./sql');
+var sql = require('./sql')();
 var moment = require('moment');
 const async = require('async');
+const axios = require('axios');
 // AWS SQS 연결
 var AWS = require('aws-sdk');
 // Set the region
@@ -28,31 +29,30 @@ var params = {
 var AGENT_KEY = 'FxRhny8GSoSOCufs6Bfa';
 var PARTNER_KEY_DEV = 'fAO8bJKWQfuMwjNhSYXS';   // dev
 
+const url = "https://dev2-biztalk-api.talk.naver.com/v1/";
+
+const config = {
+    headers: { "content-type": "application/json", "Authorization" : "FxRhny8GSoSOCufs6Bfa" },
+  }
+
 const sendNaver = ({ messageKey, receivers, message, templateCode, clientKey }) => {
-    /*
-    return axios.post(url+clientKey+'/send', {
+    console.log('************************sendNaver');
+    var sendData = {
         "messageKey": messageKey
         , "userName": "테스트" 
         , "phoneNumber" : receivers
         , "templateCode" : templateCode
-        //, "message" : "테스트님\r\n\r\n인증번호 12345 를 입력해 주세요."
         , "message" : message
+        };
 
-    }, config
+    var sendPath = url + clientKey + '/send';
+
+    return axios.post(sendPath, sendData, config
     ).then((res) => res.data).catch(err => {
         console.log('err', err);
-    });       
-    */
+    });
 
-   var sendData = {
-                "messageKey": messageKey
-                , "userName": "테스트" 
-                , "phoneNumber" : receivers
-                , "templateCode" : templateCode
-                , "message" : message
-                };
-    
-    var sendPath = '/' + PARTNER_KEY_DEV + '/send';
+    /*
     // 개발
     apiModule.apicalldev(sendPath, sendData, function(status, res) {
         console.log('======apiModule.apicalldev======');
@@ -62,14 +62,14 @@ const sendNaver = ({ messageKey, receivers, message, templateCode, clientKey }) 
         if(status == '200') {
             // 진짜 성공은 res.success == true
             console.log('api발송 완료');
-            //talkModule.updateTalkList(res, sendList);
+            //talkModule.updateTalkList(res, sendList);            
         }
-
     });
+    */
 }
 
 var receiveMsg = function(callback){
-    
+    console.log('****************receiveMsg');
     sqs.receiveMessage(params, function(err, data) {
       if (err) 
         return callback(err);
@@ -83,7 +83,7 @@ var receiveMsg = function(callback){
 }
 
 var deleteMsg = async function(){
-    
+    console.log('****************deleteMsg');
     if(sqsReqId != undefined || sqsReqId != null) {
         var deleteParams = {
                             QueueUrl: queueURL,
@@ -101,7 +101,8 @@ var deleteMsg = async function(){
     }  
 }
 
-function nvl(str, defaultStr){
+function nvl(str, defaultStr) {
+
     if(typeof str == "undefined" || str == null || str == "")
         str = defaultStr ;
      
@@ -109,6 +110,7 @@ function nvl(str, defaultStr){
 }
 
 var naverSend = async function() {
+    console.log('****************naverSend');
     if(result.length >= 0) {
         for(i=0;i < result.length;i++) {            
             sendData = JSON.parse(result[i].Body);
@@ -126,6 +128,7 @@ var naverSend = async function() {
                 sendData = null;
                 sqsReqId = result[i].ReceiptHandle
             });
+            
             await dbIns();
             await deleteMsg(sqsReqId);
         };
@@ -139,9 +142,9 @@ var dbIns = async function() {
         list : insData
     }
     
-    console.log('param', param);
+    //console.log('param', param);
     
-    await sql.insert(param, function(err, data){
+    await sql.insert(param, function(err, data) {
         if(err) 
             console.log(err);
         else 
@@ -160,8 +163,10 @@ function talkService() {
             receiveMsg,
             naverSend
         ], function(err, result) {
-            if (err) console.log(err);
-            else console.log('*******schedule end*******',result);
+            if(err) 
+                console.log(err);
+            else 
+                console.log('*******schedule end*******', result);
         });
     }
 }

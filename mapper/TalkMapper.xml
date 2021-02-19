@@ -61,6 +61,109 @@
            </if>
     </select>
 
+    <insert id="addMessages">
+        /* TalkMapper | addMessages */
+		INSERT INTO TB_MSG_TALK (  
+			CLIENT_SEQ
+			,CLIENT_ID
+			,AGENT_ID
+			,AGENT_MSG_SEQ
+			,SERV_NO
+			,TALK_ORD_NO
+			,SEND_KEY
+			,MSG_TITLE
+			,MSG_TYPE
+			,BACK_TYPE
+			,PROC_TYPE
+			,REQ_SEND_DT
+			,TMPL_CD
+			,MSG_IMG_PATH1
+			,MSG_IMG_PATH2
+			,MSG_IMG_PATH3
+			,IMG_PROC_FLAG
+			,AD_YN
+			,TALK_BTN_NM
+			,TALK_BTN_URL
+			,TALK_BTN_LINK1
+			,TALK_BTN_LINK2
+			,TALK_BTN_LINK3
+			,TALK_BTN_LINK4
+			,TALK_BTN_LINK5
+			,TALK_IMG_PATH
+			,TALK_IMG_URL
+			,TALK_IMG_LINK
+			,TALK_SEND_CD
+			,MSG_SEND_CD
+			,SERV_SEND_FLAG
+			,SERV_SEND_DT
+			,RESEND_FLAG
+			,IMG_SEND_DT
+			,SERV_THREAD_ID
+			,REG_ID
+			,REG_DT
+			,MOD_ID
+			,MOD_DT
+            ,TALK_MSG
+            ,MSG_CONT
+            ,RECV_NO
+            ,CALL_NO
+			,TALK_MSG_ENC
+            ,MSG_CONT_ENC
+            ,RECV_NO_ENC
+            ,CALL_NO_ENC
+		) VALUES
+		<foreach collection="list" item="msg" separator=",">
+			(#{msg.clientSeq}
+			,#{msg.clientId}
+			,#{msg.agentId}
+			,#{msg.agentMsgSeq}
+			,#{msg.servNo}
+			,#{msg.talkOrdNo}
+			,#{msg.sendKey}
+			,#{msg.msgTitle}
+			,#{msg.msgType}
+			,#{msg.backType}
+			,#{msg.procType}
+            ,NOW()
+			,#{msg.tmplCd}
+			,#{msg.msgImgPath1}
+			,#{msg.msgImgPath2}
+			,#{msg.msgImgPath3}
+			,#{msg.imgProcFlag}
+			,#{msg.adYn}
+			,#{msg.talkBtnNm}
+			,#{msg.talkBtnUrl}
+			,#{msg.talkBtnLink1}
+			,#{msg.talkBtnLink2}
+			,#{msg.talkBtnLink3}
+			,#{msg.talkBtnLink4}
+			,#{msg.talkBtnLink5}
+			,#{msg.talkImgPath}
+			,#{msg.talkImgUrl}
+			,#{msg.talkImgLink}
+			,#{msg.talkSendCd}
+			,#{msg.msgSendCd}
+			,#{msg.servSendFlag}
+			,#{msg.servSendDt}
+			,#{msg.resendFlag}
+			,#{msg.imgSendDt}
+			,#{msg.servThreadId}
+			,#{msg.regId}
+			,NOW()
+			,#{msg.regId}
+			,NOW()
+            ,#{msg.talkMsg}
+            ,#{msg.msgCont}
+            ,#{msg.recvNoE164}
+            ,#{msg.callNo}
+            ,'abcdefghijklmnopqrstuvwxyz'
+            ,'abcdefghijklmnopqrstuvwxyz'
+            ,'abcdefghijklmnopqrstuvwxyz'
+            ,'abcdefghijklmnopqrstuvwxyz'
+			)
+		</foreach>
+	</insert>
+
     <update id="updateTalkList">
         UPDATE tb_msg_talk
            SET talk_send_cd   = #{talk_send_cd}
