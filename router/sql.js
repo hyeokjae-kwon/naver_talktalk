@@ -10,25 +10,19 @@ var format = {language: 'sql', indent: '  '};
 module.exports = function () {
   return {
     insert: function(param, callback) {
-      dbConn.getConnection(function(conn) {
-                
-        /*
+      dbConn.getConnection(function(err, conn) {
+                        
         if(err) {
           return callback(err);
         }
         
-        conn.beginTransaction(err => {
-          console.log('22222222');
-          
+        conn.beginTransaction().then((result) =>{
+                    
           if(err) {
-            console.log(err);
             return callback(err);
           } 
-          */
-
-          console.log('Start Transaction!');
-          var query = talkMapper.getStatement('TalkMapper', 'addMessages', param, format);
           
+          var query = talkMapper.getStatement('TalkMapper', 'addMessages', param, format);
           conn.query(query)
                   .then((result) => {
                       console.log('result code : ' + 200);
@@ -45,12 +39,12 @@ module.exports = function () {
                       conn.rollback();
                       conn.release();
                   });
-
-                  //conn.release();
           
-        //});
+        });
       });  
     },
+
+
     update: function(param, callback) {
       dbConn.getConnection(function(conn) {
         var param = logList;

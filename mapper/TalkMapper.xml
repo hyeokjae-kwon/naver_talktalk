@@ -124,7 +124,7 @@
 			,#{msg.msgType}
 			,#{msg.backType}
 			,#{msg.procType}
-            ,NOW()
+            ,#{msg.reqSendDtStr}
 			,#{msg.tmplCd}
 			,#{msg.msgImgPath1}
 			,#{msg.msgImgPath2}
@@ -156,10 +156,10 @@
             ,#{msg.msgCont}
             ,#{msg.recvNoE164}
             ,#{msg.callNo}
-            ,'abcdefghijklmnopqrstuvwxyz'
-            ,'abcdefghijklmnopqrstuvwxyz'
-            ,'abcdefghijklmnopqrstuvwxyz'
-            ,'abcdefghijklmnopqrstuvwxyz'
+            ,FN_AES_ENC_C01('5681d7b7ea30ab8e24f537bf973cb967802efebe1cf23f2fdb9b9c4c1106738cca530924342d8910b12239483ed98ea572fc2d2e78a4bbd9cd82187452b60878', #{msg.talkMsg})
+			,FN_AES_ENC_C01('5681d7b7ea30ab8e24f537bf973cb967802efebe1cf23f2fdb9b9c4c1106738cca530924342d8910b12239483ed98ea572fc2d2e78a4bbd9cd82187452b60878', #{msg.msgCont})
+			,FN_AES_ENC_C01('5681d7b7ea30ab8e24f537bf973cb967802efebe1cf23f2fdb9b9c4c1106738cca530924342d8910b12239483ed98ea572fc2d2e78a4bbd9cd82187452b60878', #{msg.recvNoE164})
+			,FN_AES_ENC_C01('5681d7b7ea30ab8e24f537bf973cb967802efebe1cf23f2fdb9b9c4c1106738cca530924342d8910b12239483ed98ea572fc2d2e78a4bbd9cd82187452b60878', #{msg.callNo})
 			)
 		</foreach>
 	</insert>

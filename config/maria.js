@@ -14,8 +14,8 @@ function dbConnect() {
     this.getConnection = function(callback) {
         pool.getConnection()
             .then((conn) => {
-                callback(conn);
-            });
+                callback(null, conn);
+            }).catch(callback || emptyError);
     },
     this.getConnectionAsync = async function() {
         // 비동기방식 connection
