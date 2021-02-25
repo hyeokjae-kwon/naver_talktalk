@@ -30,6 +30,7 @@ var AGENT_KEY = 'FxRhny8GSoSOCufs6Bfa';
 var PARTNER_KEY_DEV = 'fAO8bJKWQfuMwjNhSYXS';   // dev
 
 var url = "https://dev2-biztalk-api.talk.naver.com/v1/";
+var urlProd = "https://biztalk-api.talk.naver.com/v1/";
 
 var config = {
                 headers: { "content-type": "application/json", "Authorization" : "FxRhny8GSoSOCufs6Bfa" },
@@ -46,6 +47,7 @@ const sendNaver = ({ messageKey, receivers, message, templateCode, clientKey }) 
         };
 
     var sendPath = url + clientKey + '/send';
+    //var sendPath = urlProd + clientKey + '/send';
 
     return axios.post(sendPath, sendData, config
     ).then((res) => res.data).catch(err => {

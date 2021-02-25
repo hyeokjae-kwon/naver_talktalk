@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var talk = require('./talk/TalkIndex');
-var account  = require('./account/AccountIndex');
-var template = require('./template/TemplateIndex');
+const express = require('express');
+const router = express.Router();
+
+const talk = require('./talk/TalkIndex');
+const account  = require('./account/AccountIndex');
+const template = require('./template/TemplateIndex');
 
 // url 연결(spring controller 역할)
-router.get('/talk', talk);
-router.get('/account', account);
-router.get('/template', template)
+router.use('/talk', talk);
+router.use('/account', account);
+router.use('/template', template);
 
 module.exports = router;

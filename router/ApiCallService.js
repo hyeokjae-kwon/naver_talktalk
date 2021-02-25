@@ -1,21 +1,57 @@
 //var request = require('request');
 var axios = require('axios');
 
-const API_SERVER_DEV = 'https://dev2-biztalk-api.talk.naver.com';
-const API_SERVER_PROD = 'https://biztalk-api.talk.naver.com';
-const API_VERSION = '/v1';
+const API_SERVER_DEV = 'https://dev2-biztalk-api.talk.naver.com/';
+const API_SERVER_PROD = 'https://biztalk-api.talk.naver.com/';
+const API_VERSION = 'v1/';
 //const AGENT_KEY = 'FxRhny8GSoSOCufs6Bfa';
-var config = {
-    headers: { "content-type": "application/json", "Authorization" : "FxRhny8GSoSOCufs6Bfa" },
 
+const config = {
+    headers: { "content-type": "application/json", "Authorization" : "FxRhny8GSoSOCufs6Bfa" },
 }
 
 function ApiCallService() {
     this.apiCallPost = function(apiPath, data, callback) {
+        // 운영 post
+        var url = API_SERVER_PROD + API_VERSION + apiPath;
+
+        return axios.post(url, data, config
+            ).then((res) => {
+                callback(res.data);
+            }).catch(err => {
+                console.log('err', err);
+            });
+    },
+    this.apiCallGet = function(apiPath, data, callback) {
+        // 운영 get
+        var url = API_SERVER_PROD + API_VERSION + apiPath;
+
+        return axios.get(url, data, config
+            ).then((res) => {
+                callback(res.data);
+            }).catch(err => {
+                console.log('err', err);
+            });
+    },
+    this.apiCallPostDev = function(apiPath, data, callback) {
+        // 개발 post
         var url = API_SERVER_DEV + API_VERSION + apiPath;
 
         return axios.post(url, data, config
-            ).then((res) => res.data).catch(err => {
+            ).then((res) => {
+                callback(res.data);
+            }).catch(err => {
+                console.log('err', err);
+            });
+    },
+    this.apiCallGetDev = function(apiPath, data, callback) {
+        // 개발 get
+        var url = API_SERVER_DEV + API_VERSION + apiPath;
+
+        return axios.get(url, data, config
+            ).then((res) => {
+                callback(res.data);
+            }).catch(err => {
                 console.log('err', err);
             });
     }
