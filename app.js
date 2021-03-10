@@ -15,7 +15,7 @@ var talkService = require('./router/talk/TalkService');
 var cron = require('node-cron');
 cron.schedule('*/5 * * * * *', function() {
     console.log('*****cron_scheduler_start');
-    //talkService.sendNaverTalk();
+    talkService.sendNaverTalk();
     console.log('cron_scheduler_end*****');
 });
 
